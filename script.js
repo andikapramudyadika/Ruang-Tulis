@@ -177,6 +177,10 @@ function renderAll() {
   renderArchive();
 }
 
+function removeLeadingMarkdownTitle(markdown) {
+  return markdown.replace(/^\uFEFF?(\s*\r?\n)*#\s+.+(?:\r?\n|$)/, "");
+}
+
 function isAbsoluteOrSpecialUrl(value) {
   return /^(?:[a-z][a-z\d+.-]*:|#|\/)/i.test(value);
 }
@@ -227,7 +231,7 @@ async function loadArticle(index) {
       throw new Error(`Artikel tidak ditemukan: ${post.file}`);
     }
 
-    const markdown = await response.text();
+    const markdown = removeLeadingMarkdownTitle(await response.text());
     const html = marked.parse(markdown);
 
     articleContent.innerHTML = `
