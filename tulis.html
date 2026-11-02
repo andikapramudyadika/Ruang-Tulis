@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Ruang Penulis — Ruang Tulis</title>
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="editor.css">
+  <script src="theme-init.js"></script>
+</head>
+<body class="writer-page">
+  <a class="skip-link" href="#postTitle">Lewati ke tulisan</a>
+  <header class="site-header">
+    <div class="header-inner writer-header">
+      <a href="index.html" class="logo"><span class="logo-mark" data-icon="pen"></span>Ruang Tulis<span class="writer-label">/ Penulis</span></a>
+      <div class="writer-actions">
+        <button class="icon-button" id="libraryButton" type="button" aria-label="Buka draft dan tulisan" title="Draft dan tulisan"><span data-icon="book"></span></button>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema"></button>
+        <button class="button button-quiet" id="previewButton" type="button" aria-label="Pratinjau" title="Pratinjau"><span data-icon="book"></span><span class="action-label">Pratinjau</span></button>
+        <button class="button button-primary" id="publishButton" type="button">Terbitkan<span data-icon="arrow"></span></button>
+      </div>
+    </div>
+  </header>
+  <main class="writer-shell">
+    <div class="writer-status"><span id="saveStatus" role="status" aria-live="polite">Menyiapkan draft…</span></div>
+    <div id="editorNotice" class="editor-notice" role="status" hidden></div>
+    <div id="publicationResult" class="publication-result" role="status" hidden></div>
+    <textarea id="postTitle" class="writer-title" rows="1" maxlength="180" placeholder="Judul tulisan" aria-label="Judul tulisan" aria-describedby="titleHint"></textarea>
+    <p id="titleHint" hidden>Tulis judul, lalu pindah ke isi tulisan di bawah.</p>
+    <div class="writer-byline"><span class="byline-rule"></span>Andika Pramudya<span class="meta-divider">·</span><span id="wordCount">0 kata</span></div>
+    <div class="format-bar" id="formatBar" role="toolbar" aria-label="Format tulisan">
+      <button type="button" data-command="bold" aria-label="Tebal (Ctrl+B)" aria-pressed="false" title="Tebal (Ctrl+B)"><strong>B</strong></button>
+      <button type="button" data-command="italic" aria-label="Miring (Ctrl+I)" aria-pressed="false" title="Miring (Ctrl+I)"><em>I</em></button>
+      <button type="button" data-command="h2" aria-label="Judul bagian" aria-pressed="false" title="Judul bagian">H2</button>
+      <button type="button" data-command="link" aria-label="Tambah atau ubah tautan" aria-pressed="false" title="Tautan"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m10 13 4-4m-6 7-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 2 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" transform="translate(1 0)"/></svg></button>
+      <button type="button" id="imageButton" aria-label="Tambah gambar" title="Tambah gambar"><span data-icon="image"></span></button>
+      <button type="button" id="moreFormatsButton" aria-label="Format lainnya" title="Format lainnya" aria-haspopup="dialog"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+    </div>
+    <div id="writingArea" class="writing-area article-body"><p class="loading-state">Menyiapkan ruang menulis…</p></div>
+    <p class="editor-hint">Pilih teks untuk mengubah format. Seret atau tempel gambar langsung ke tulisan.</p>
+    <details class="publishing-details" id="postDetails">
+      <summary>Detail tulisan <span id="categorySummary">Monthly Essay</span></summary>
+      <div class="detail-grid">
+        <label>Kategori<select id="postCategory"><option>Monthly Essay</option><option>Weekly Note</option><option>Personal</option></select></label>
+        <label>Tanggal<input id="postDate" type="date" required></label>
+        <label class="full-width">Alamat tulisan<input id="postSlug" maxlength="90" placeholder="otomatis-dari-judul" spellcheck="false" pattern="[a-z0-9]+(-[a-z0-9]+)*"><span class="field-hint">Dibuat otomatis. Alamat tulisan yang sudah terbit tetap sama.</span></label>
+        <label class="full-width">Ringkasan<textarea id="postExcerpt" rows="3" maxlength="400" placeholder="Otomatis dari paragraf pertama, atau tulis ringkasan sendiri."></textarea></label>
+      </div>
+    </details>
+    <div class="connection-panel"><div><strong id="connectionTitle">Draft milik Anda.</strong><p id="connectionDescription">Tersimpan di perangkat ini. Hubungkan GitHub saat siap menerbitkan.</p></div><button class="button" id="connectButton" type="button">Hubungkan GitHub</button></div>
+    <div class="writer-bottom"><button class="button button-quiet" id="exportButton" type="button">Simpan salinan Markdown</button><a href="index.html" class="text-link">Kembali membaca <span data-icon="arrow"></span></a></div>
+    <noscript><p class="empty-state">Aktifkan JavaScript untuk menggunakan editor.</p></noscript>
+  </main>
+  <input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden>
+  <dialog id="libraryDialog" aria-labelledby="libraryTitle"><div class="dialog-heading"><h2 id="libraryTitle">Ruang tulisan Anda</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup"><span data-icon="close"></span></button></div><button class="button button-primary" id="newDraftButton" type="button"><span data-icon="plus"></span>Tulisan baru</button><h3 class="dialog-section-title">Draft di perangkat ini</h3><div id="draftList"></div><h3 class="dialog-section-title">Sudah terbit</h3><p class="field-hint" id="publishedHint">Hubungkan GitHub untuk menyunting versi terbaru.</p><div id="publishedList"></div><button class="button library-connect" id="libraryConnectButton" type="button">Hubungkan GitHub</button></dialog>
+  <dialog id="formatsDialog" aria-labelledby="formatsHeading"><div class="dialog-heading"><h2 id="formatsHeading">Format lainnya</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup"><span data-icon="close"></span></button></div><div class="format-options" role="group" aria-label="Format tambahan"><button class="button" type="button" data-command="h3" aria-pressed="false">Subjudul</button><button class="button" type="button" data-command="blockquote" aria-pressed="false">Kutipan</button><button class="button" type="button" data-command="bulletList" aria-pressed="false">Daftar poin</button><button class="button" type="button" data-command="orderedList" aria-pressed="false">Daftar nomor</button><button class="button" type="button" data-command="undo">Urungkan</button><button class="button" type="button" data-command="redo">Ulangi</button></div></dialog>
+  <dialog id="previewDialog" class="preview-dialog" aria-labelledby="previewHeading"><div class="dialog-heading"><h2 id="previewHeading">Pratinjau tulisan</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup pratinjau"><span data-icon="close"></span></button></div><article id="previewContent" class="article-body"></article></dialog>
+  <dialog id="linkDialog" aria-labelledby="linkHeading"><form id="linkForm"><div class="dialog-heading"><h2 id="linkHeading">Tautan</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup"><span data-icon="close"></span></button></div><label>Alamat tautan<input id="linkUrl" type="url" placeholder="https://" required></label><div class="dialog-actions"><button class="button button-quiet" id="removeLinkButton" type="button">Hapus tautan</button><button class="button button-primary" type="submit">Simpan tautan</button></div></form></dialog>
+  <dialog id="imageDialog" aria-labelledby="imageHeading"><form id="imageForm"><div class="dialog-heading"><h2 id="imageHeading">Detail gambar</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup"><span data-icon="close"></span></button></div><label>Deskripsi gambar<input id="imageAlt" maxlength="300" placeholder="Jelaskan isi gambar untuk pembaca layar" required></label><label>Keterangan (opsional)<input id="imageCaption" maxlength="300" placeholder="Keterangan atau sumber gambar"></label><div class="dialog-actions"><button class="button button-primary" type="submit">Simpan</button></div></form></dialog>
+  <dialog id="setupDialog" aria-labelledby="setupHeading"><div class="dialog-heading"><h2 id="setupHeading">Hubungkan ruang menulis</h2><button type="button" class="icon-button" data-close-dialog aria-label="Tutup"><span data-icon="close"></span></button></div><p>Menulis dan menyimpan draft sudah bisa digunakan. Penerbitan memerlukan aktivasi layanan satu kali oleh pemilik blog.</p><ol><li>Aktifkan layanan penerbitan Cloudflare.</li><li>Daftarkan login GitHub untuk Ruang Tulis.</li><li>Isi alamat layanan pada konfigurasi website.</li></ol><p>Sesudah terhubung, cukup masuk dengan GitHub lalu klik Terbitkan.</p><a class="button" href="docs/aktivasi.html" target="_blank" rel="noopener">Buka panduan aktivasi <span data-icon="arrow"></span></a></dialog>
+  <script src="site.config.js"></script><script src="ui.js"></script><script type="module" src="assets/editor.js"></script>
+</body>
+</html>
