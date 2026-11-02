@@ -4,34 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ruang Tulis</title>
+  <meta name="description" content="Catatan pribadi Andika Pramudya: opini, refleksi, dan hal-hal yang sedang dipikirkan." />
   <link rel="stylesheet" href="style.css" />
+  <script src="theme-init.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Lewati ke isi</a>
   <header class="site-header">
-    <a href="#home" class="logo" data-page="home">Ruang Tulis</a>
+    <div class="header-inner">
+    <a href="#home" class="logo" data-page="home"><span class="logo-mark" data-icon="pen"></span>Ruang Tulis</a>
 
     <nav class="nav-menu" id="navMenu" aria-label="Navigasi utama">
-      <a href="#home" data-page="home">Home</a>
-      <a href="#weekly" data-page="weekly">Weekly Notes</a>
-      <a href="#monthly" data-page="monthly">Monthly Essays</a>
-      <a href="#archive" data-page="archive">Archive</a>
-      <a href="#about" data-page="about">About</a>
+      <a href="#home" data-page="home">Beranda</a>
+      <a href="#archive" data-page="archive">Tulisan</a>
+      <a href="#about" data-page="about">Tentang</a>
     </nav>
 
     <div class="header-actions">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema">
-        <span id="themeIcon" aria-hidden="true">☾</span>
+        <span data-icon="moon"></span>
       </button>
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu">
-        &#9776;
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navMenu">
+        <span data-icon="menu"></span>
       </button>
+    </div>
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <section id="home" class="page active">
       <div class="container hero">
-        <p class="eyebrow">Ruang Opini</p>
+        <p class="eyebrow">Catatan Andika Pramudya</p>
         <h1>Catatan pribadi, ditulis pelan.</h1>
         <p class="hero-text">
           Ruang kecil untuk menyimpan opini, refleksi, dan hal-hal yang sedang saya pikirkan.
@@ -41,13 +44,12 @@
       <div class="container section">
         <div class="section-header">
           <div>
-            <p class="eyebrow">Latest</p>
             <h2>Tulisan Terbaru</h2>
           </div>
           <a href="#archive" class="text-link" data-page="archive">Lihat arsip</a>
         </div>
 
-        <div class="post-list compact" id="latestPosts">
+        <div class="post-list compact" id="latestPosts" aria-live="polite" aria-busy="true">
           <p class="empty-state">Memuat tulisan...</p>
         </div>
       </div>
@@ -55,9 +57,9 @@
 
     <section id="weekly" class="page">
       <div class="container page-title">
-        <p class="eyebrow">Routine Writing</p>
         <h1>Weekly Notes</h1>
         <p>Catatan mingguan yang lebih ringan, pendek, dan dekat dengan hal sehari-hari.</p>
+        <nav class="section-nav" aria-label="Jenis tulisan"><a href="#archive" data-page="archive">Semua tulisan</a><a href="#weekly" data-page="weekly">Weekly Notes</a><a href="#monthly" data-page="monthly">Monthly Essays</a></nav>
       </div>
 
       <div class="container post-list" id="weeklyPosts">
@@ -67,9 +69,9 @@
 
     <section id="monthly" class="page">
       <div class="container page-title">
-        <p class="eyebrow">Longform Writing</p>
         <h1>Monthly Essays</h1>
         <p>Tulisan yang lebih panjang dan pelan, biasanya berisi opini atau rangkuman pemikiran.</p>
+        <nav class="section-nav" aria-label="Jenis tulisan"><a href="#archive" data-page="archive">Semua tulisan</a><a href="#weekly" data-page="weekly">Weekly Notes</a><a href="#monthly" data-page="monthly">Monthly Essays</a></nav>
       </div>
 
       <div class="container post-list" id="monthlyPosts">
@@ -79,20 +81,19 @@
 
     <section id="archive" class="page">
       <div class="container page-title">
-        <p class="eyebrow">All Writings</p>
-        <h1>Archive</h1>
-        <p>Semua tulisan yang tersedia di folder posts, tersusun dari yang terbaru.</p>
+        <h1>Tulisan</h1>
+        <p>Opini, catatan, dan pemikiran dari waktu ke waktu. Tersusun dari yang terbaru.</p>
       </div>
 
       <div class="container archive">
         <div class="archive-filter" id="archiveFilter">
-          <button class="filter-btn active" type="button" data-filter="all">Semua</button>
-          <button class="filter-btn" type="button" data-filter="weekly">Weekly</button>
-          <button class="filter-btn" type="button" data-filter="monthly">Monthly</button>
-          <button class="filter-btn" type="button" data-filter="personal">Personal</button>
+          <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Semua</button>
+          <button class="filter-btn" type="button" data-filter="weekly" aria-pressed="false">Weekly</button>
+          <button class="filter-btn" type="button" data-filter="monthly" aria-pressed="false">Monthly</button>
+          <button class="filter-btn" type="button" data-filter="personal" aria-pressed="false">Personal</button>
         </div>
 
-        <div id="archiveList">
+        <div id="archiveList" aria-live="polite">
           <p class="empty-state">Memuat arsip...</p>
         </div>
       </div>
@@ -100,7 +101,6 @@
 
     <section id="about" class="page">
       <div class="container article-body">
-        <p class="eyebrow">About</p>
         <h1>Halo, saya menulis di sini.</h1>
 
         <p>
@@ -136,15 +136,16 @@
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Andika Pramudya. All rights reserved.</p>
+    <p>&copy; 2026 Andika Pramudya. Ditulis dengan waktu dan perhatian.</p>
     <div>
-      <a href="#weekly" data-page="weekly">Weekly</a>
-      <a href="#monthly" data-page="monthly">Monthly</a>
-      <a href="#archive" data-page="archive">Archive</a>
+      <a href="#weekly" data-page="weekly">Weekly Notes</a>
+      <a href="#monthly" data-page="monthly">Monthly Essays</a>
+      <a href="tulis.html"><span data-icon="pen"></span>Ruang penulis</a>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="script.js"></script>
+  <script src="ui.js"></script>
+  <script src="assets/renderer.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

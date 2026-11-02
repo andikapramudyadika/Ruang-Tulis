@@ -1,0 +1,4 @@
+assets/*.js linguist-generated=true
+assets/*.LEGAL.txt linguist-generated=true
+assets/THIRD-PARTY.txt linguist-generated=true
+publisher/worker.bundle.mjs linguist-generated=true
